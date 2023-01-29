@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+package budgetapp;
+
+service BudgetService{
+
+  rpc createUser (newUserDetails) returns (newUserResponse) {}
+  rpc loginUser (userDetails) returns (confirmLog) {}
+
+  rpc addTransaction (transactionDetails) returns (confirmLog) {}
+  rpc viewTransaction (transactionSearch) returns (transactionDetails) {}
+
+  rpc addCategory (categoryDetails) returns (confirmLog) {}
+  rpc viewCategory (categorySearch) returns (categoryDetails) {}
+
+  rpc addBudgetCat (budgetCatDetails) returns (confirmLog) {}
+  rpc viewBudgetCat (budgetCatSearch) returns (budgetCatDetails) {}
+
+  rpc addBudgetOverall(budgetOverallDetails) returns (confirmLog) {}
+  rpc viewBudgetOverall (budgetOverallSearch) returns (budgetOverallDetails) {}
+
+}
+
+message newUserDetails{
+  string userEmail = 1;
+  string userPassword = 2;
+  string userDOB = 3;
+  string userPhoneNum = 4;
+}
+
+message confirmLog{
+  bool confirmSuccess = 1;
+  int userID = 2;
+}
+
+message userDetails{
+  userEmail = 1;
+  userPassword = 2;
+}
+
+message transactionDetails{
+  int32 transactionID = 1;
+  string transactionDescription = 2;
+  string transactionDate = 3;
+  int32 categoryID = 4;
+  double transactionAmount = 6;
+  int32 sourceID = 7;
+  int32 userID = 8;
+}
+
+message transactionSearch{
+  string startDate = 1;
+  string endDate = 2;
+  string transactionName = 3;
+  int32 categoryID = 4;
+  bool incoming = 5;
+  double transactionAmount = 6;
+  string transactionSource = 7;
+}
+
+message categoryDetails{
+  int32 categoryID = 1;
+  string categoryName = 2;
+  string categoryDescription = 3;
+  bool income = 4;
+}
+
+message categorySearch{
+  int32 categoryID = 1;
+  string categoryStartDate = 2;
+  string categoryEndDate = 3;
+  double categorySearchAmount = 4;
+  bool income = 5;
+}
+
+message budgetCatDetails{
+  int32 budgetCatID = 1;
+  int32 categoryID = 2;
+  string budgetCatStartDate = 3;
+  string budgetCatEndDate = 4;
+  double budgetCatAmount = 5;
+}
+
+message budgetCatSearch{
+  int32 budgetCatID = 1;
+  int32 categoryID = 2;
+  string budgetCatStartDate = 3;
+  string budgetCatEndDate = 4;
+  double budgetRelation = 5;
+  bool budgetCatSuccess = 6;
+}
+
+message budgetOverallDetails{
+  int32 budgetOverallID = 1;
+  string budgetOverallStartDate = 2;
+  string budgetOverallEndDate = 3;
+  double budgetOverallAmount = 4;
+}
+
+message budgetOverallSearch{
+  int32 budgetOverallID = 1;
+  string budgetOverallStartDate = 3;
+  string budgetOverallEndDate = 4;
+  double budgetRelation = 5;
+  bool budgetOverallSuccess = 6;
+}
